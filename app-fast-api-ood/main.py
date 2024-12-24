@@ -4,8 +4,10 @@ from fastapi.responses import StreamingResponse
 from io import BytesIO
 from PIL import Image
 from fastapi.middleware.cors import CORSMiddleware
+from zipfile import ZipFile
 
 from model_ood import detect_objects
+from image_processing import prepare_image
 
 app = FastAPI()
 
@@ -24,29 +26,39 @@ def root():
 
 
 @app.post("/upload")
-async def uploads_multiple_files(upload_file: UploadFile = File(...)):
+async def upload_image_file(upload_file: UploadFile = File(...)):
     file_content = await upload_file.read()
     file_like = BytesIO(file_content)
+    image = Image.open(file_like)
 
-    angle_degrees, annotated_img = detect_objects(file_like)
-    if angle_degrees:
-        angle_degrees = ", ".join(angle_degrees)
-    else:
-        angle_degrees = 'No oriented bounding boxes detected.'
+    angle_to_rot, annotated_img, rotated_image = detect_objects(image)
+    if angle_to_rot == 0:
+        angle_to_rot = 'No oriented bounding boxes detected.'
 
-    # Преобразование аннотированного изображения в байты
-    img_byte_arr = BytesIO()
-    annotated_img_pil = Image.fromarray(annotated_img)  # Преобразуем numpy-массив в PIL изображение
-    annotated_img_pil.save(img_byte_arr, format="PNG")  # Сохраняем как PNG
-    img_byte_arr.seek(0)  # Возвращаемся к началу потока
+    # Подготовка ZIP-архива
+    zip_buffer = BytesIO()
+    with ZipFile(zip_buffer, "w") as zip_file:
+        # Добавляем аннотированное изображение
+        annotated_image_bytes = prepare_image(annotated_img)
+        zip_file.writestr("annotated_image.png", annotated_image_bytes.getvalue())
 
+        # Добавляем повернутое изображение
+        rotated_image_bytes = prepare_image(rotated_image)
+        zip_file.writestr("rotated_image.png", rotated_image_bytes.getvalue())
+
+    zip_buffer.seek(0)
+
+    # Возвращаем ZIP-архив
     return StreamingResponse(
-        img_byte_arr,
-        media_type="image/png",
+        zip_buffer,
+        media_type="application/zip",
         headers={
-            "Content-Disposition": "attachment; filename=annotated_image.png",
-            "Angles-Degrees": angle_degrees  # Передаем углы через заголовки
-        },
+            "Content-Disposition": "attachment; filename=images.zip",
+            # Значение, на которое повёрнуто изображение (на сколько оно отлично от прямого угла)
+            "Angle": str(-angle_to_rot),
+            # значение, на которое нужно повернуть изображение, чтобы оно встало под прямым углом
+            "Angle-To-Rot": str(angle_to_rot)
+        }
     )
 
 
