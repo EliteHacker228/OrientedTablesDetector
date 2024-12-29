@@ -5,8 +5,9 @@ import numpy as np
 
 
 base_dir = os.path.dirname(__file__)
-file_path = os.path.join(base_dir, '..', 'app-detector-ood', 'models', 'pubtab_1548_aug.pt')
-file_path = os.path.abspath(file_path)
+# file_path = os.path.join(base_dir, '..', 'app-detector-ood', 'models', 'pubtab_1548_aug.pt')
+# file_path = os.path.abspath(file_path)
+file_path = 'pubtab_1548_aug.pt'
 model = YOLO(file_path)
 
 
