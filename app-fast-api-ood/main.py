@@ -30,7 +30,7 @@ def root():
 async def upload_image_file(upload_file: UploadFile = File(...)):
     file_content = await upload_file.read()
     file_like = BytesIO(file_content)
-    image = Image.open(file_like)
+    image = Image.open(file_like).convert("RGB")
 
     angle_to_rot, annotated_img, rotated_image = detect_objects(image)
     # if angle_to_rot == 0:

@@ -37,6 +37,10 @@ def get_rotated_image(img, angle_to_rot):
 def detect_objects(image):
     image_np = np.array(image)
 
+    # преобразование для черно-белого изображения
+    if len(image_np.shape) == 2:
+        image_np = cv2.cvtColor(image_np, cv2.COLOR_GRAY2BGR)
+
     results = model(image_np)
     annotated_img = results[0].plot()
 

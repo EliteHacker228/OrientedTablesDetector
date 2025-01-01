@@ -1,3 +1,5 @@
 /.idea
 /app-detector-ood/.venv/
 /app-fast-api-ood/.venv/
+/app-fast-api-ood/__pycahce__/
+/app-fast-api-ood/.idea
