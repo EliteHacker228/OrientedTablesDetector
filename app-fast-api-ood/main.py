@@ -13,7 +13,8 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200"],
+    # allow_origins=["http://localhost:4200", "http://localhost:80"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -32,8 +33,8 @@ async def upload_image_file(upload_file: UploadFile = File(...)):
     image = Image.open(file_like)
 
     angle_to_rot, annotated_img, rotated_image = detect_objects(image)
-    if angle_to_rot == 0:
-        angle_to_rot = 'No oriented bounding boxes detected.'
+    # if angle_to_rot == 0:
+    #     angle_to_rot = 'No oriented bounding boxes detected.'
 
     # Подготовка ZIP-архива
     zip_buffer = BytesIO()
