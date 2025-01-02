@@ -5,7 +5,7 @@ import numpy as np
 
 
 base_dir = os.path.dirname(__file__)
-file_path = os.path.join(base_dir, '..', 'app-detector-ood', 'models', 'pubtab_1548_aug.pt')
+file_path = os.path.join(base_dir, 'models', 'pubtab_1548_aug.pt')
 file_path = os.path.abspath(file_path)
 model = YOLO(file_path)
 
@@ -36,6 +36,10 @@ def get_rotated_image(img, angle_to_rot):
 
 def detect_objects(image):
     image_np = np.array(image)
+
+    # преобразование для черно-белого изображения
+    if len(image_np.shape) == 2:
+        image_np = cv2.cvtColor(image_np, cv2.COLOR_GRAY2BGR)
 
     results = model(image_np)
     annotated_img = results[0].plot()

@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./app-fast-api-ood
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app-fast-api-ood:/app
+
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./front:/app
+      - node_modules:/app/node_modules
+    depends_on:
+      - backend
+volumes:
+  pgdata: {}
+  node_modules: {}
+# Нужно определение volumes? Не знаю, но без этого не работает
+# https://stackoverflow.com/questions/78336694/error-cannot-find-module-rollup-rollup-linux-x64-musl-on-docker-container
