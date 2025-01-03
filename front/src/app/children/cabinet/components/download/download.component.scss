@@ -1,0 +1,13 @@
+.download-page {
+    margin-top: 5%;
+    font-size: 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__dwnld {
+        margin-top: 100px;
+        color: #6565ea;
+    }
+}

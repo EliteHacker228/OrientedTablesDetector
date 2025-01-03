@@ -1,5 +1,6 @@
-<div> упс.. </div>
-
-<div> Что-то пошло не так. Попробуйте еще раз </div>
-<img src="assets/img/error-img.png">
-<div (click)="reset.emit()"> Загрузить новый файл </div>
+<div class="error-page">
+    <div class="error-page__header"> упс.. </div>
+    <div class="error-page__text"> Что-то пошло не так. Попробуйте еще раз </div>
+    <img class="error-page_img" src="assets/img/error-img.png">
+    <div class="error-page__text" (click)="reset.emit()"> Загрузить новый файл </div>
+</div>

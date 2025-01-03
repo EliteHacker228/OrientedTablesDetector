@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 @Component({
     selector: 'otd-download',
     templateUrl: './download.component.html',
+    styleUrls: ['./download.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })

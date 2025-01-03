@@ -1,9 +1,12 @@
 <div *ngIf="pageState$ | async as pageState">
-    <div [ngSwitch]="pageState">
+    <div [ngSwitch]="pageState" class="main-page">
         <ng-container *ngSwitchDefault>
-            Распознавание текста (OCR)
-
-            Преобразование отсканированных документов и изображений в редактируемые форматы Word, Pdf, Excel и txt
+            <div class="main-page__header">
+                Распознавание текста (OCR)
+            </div>
+            <div class="main-page__text">
+                Преобразование отсканированных документов и изображений в редактируемые форматы Word, Pdf, Excel и txt
+            </div>
 
             <otb-file-uploader (fileEmitter)="startFileProcess($event)"></otb-file-uploader>
         </ng-container>

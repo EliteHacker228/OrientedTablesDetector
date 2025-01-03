@@ -5,6 +5,7 @@ import { BehaviorSubject, catchError, delay, EMPTY, Observable, of, switchMap, t
 
 @Component({
     templateUrl: './main.page.html',
+    styleUrls: ['./main.page.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
