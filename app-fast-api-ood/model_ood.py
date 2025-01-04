@@ -5,7 +5,7 @@ import numpy as np
 
 
 base_dir = os.path.dirname(__file__)
-file_path = os.path.join(base_dir, 'models', 'pubtab_1548_aug.pt')
+file_path = os.path.join(base_dir, "models", "pubtab_1548_aug.pt")
 file_path = os.path.abspath(file_path)
 model = YOLO(file_path)
 
@@ -60,4 +60,3 @@ def detect_objects(image):
 
     rotated_image = get_rotated_image(image_np, angle_to_rot)
     return angle_to_rot, annotated_img, rotated_image
-

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <div class="file-uploader">
     <ng-container *ngTemplateOutlet="uploadFile"></ng-container>
 </div>
@@ -8,11 +9,10 @@
             type="file"
             class="file-uploader_input"
             (change)="documentUploaded($event)"
-        >
+        />
     </div>
 </ng-template>
 
 <ng-template #previewFile>
     <otb-preview></otb-preview>
 </ng-template>
-

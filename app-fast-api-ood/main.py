@@ -58,11 +58,10 @@ async def upload_image_file(upload_file: UploadFile = File(...)):
             # Значение, на которое повёрнуто изображение (на сколько оно отлично от прямого угла)
             "Angle": str(-angle_to_rot),
             # значение, на которое нужно повернуть изображение, чтобы оно встало под прямым углом
-            "Angle-To-Rot": str(angle_to_rot)
-        }
+            "Angle-To-Rot": str(angle_to_rot),
+        },
     )
 
 
 if __name__ == "__main__":
     uvicorn.run(app="main:app")
-
