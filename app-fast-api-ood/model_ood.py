@@ -1,8 +1,8 @@
 import os
-import cv2
-from ultralytics import YOLO
-import numpy as np
 
+import cv2
+import numpy as np
+from ultralytics import YOLO
 
 base_dir = os.path.dirname(__file__)
 file_path = os.path.join(base_dir, "models", "pubtab_1548_aug.pt")

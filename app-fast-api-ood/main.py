@@ -1,13 +1,13 @@
-import uvicorn
-from fastapi import FastAPI, UploadFile, File
-from fastapi.responses import StreamingResponse
 from io import BytesIO
-from PIL import Image
-from fastapi.middleware.cors import CORSMiddleware
 from zipfile import ZipFile
 
-from model_ood import detect_objects
+import uvicorn
+from fastapi import FastAPI, File, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from image_processing import prepare_image
+from model_ood import detect_objects
+from PIL import Image
 
 app = FastAPI()
 

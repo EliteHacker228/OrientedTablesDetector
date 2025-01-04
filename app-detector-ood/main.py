@@ -1,7 +1,8 @@
-import cv2
-from ultralytics import YOLO
-import numpy as np
 import os
+
+import cv2
+import numpy as np
+from ultralytics import YOLO
 
 
 def get_angle_to_rot_from_result(obb):
@@ -52,10 +53,10 @@ def detect_objects(model, image_path, output_path, output_path_rot):
     cv2.imwrite(output_path_rot, rotated_image)
 
 
-model = YOLO('models/pubtab_1548_aug.pt')
-allowed_extensions = ['jpg', 'jpeg', 'png']
-for image_name in os.listdir('images'):
-    image_name_parts = image_name.split('.')
+model = YOLO("models/pubtab_1548_aug.pt")
+allowed_extensions = ["jpg", "jpeg", "png"]
+for image_name in os.listdir("images"):
+    image_name_parts = image_name.split(".")
     if image_name_parts[-1] not in allowed_extensions:
         continue
     input_path = f"images/{image_name}"

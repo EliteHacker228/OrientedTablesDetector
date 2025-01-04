@@ -3,3 +3,4 @@
 /app-fast-api-ood/.venv/
 /app-fast-api-ood/__pycache__/
 /app-fast-api-ood/.idea
+.venv
