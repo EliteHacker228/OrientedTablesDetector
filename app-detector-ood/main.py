@@ -62,6 +62,6 @@ for image_name in os.listdir("images"):
     input_path = f"images/{image_name}"
     output_path = f"results/{image_name}"
     output_path_rot = f"results/{image_name_parts[0] + '_rot.' + image_name_parts[1]}"
-    print(f"#########################")
+    print("#########################")
     print(f"results/{image_name}")
     detect_objects(model, input_path, output_path, output_path_rot)
