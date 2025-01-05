@@ -1,7 +1,19 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { ProcessFileService } from '../../services/process-file.service';
 import { ApiService } from '../../../../services/api.service';
-import { BehaviorSubject, catchError, delay, EMPTY, Observable, of, switchMap, take, tap } from 'rxjs';
+import {
+    BehaviorSubject,
+    catchError,
+    delay,
+    EMPTY,
+    Observable,
+    of,
+    Subject,
+    switchMap,
+    take,
+    takeUntil,
+    tap
+} from 'rxjs';
 
 @Component({
     templateUrl: './main.page.html',
@@ -17,7 +29,8 @@ export class MainPage {
 
     public file!: Blob;
 
-    private _pageState$: BehaviorSubject<PageStateEnum> = new BehaviorSubject<PageStateEnum>(PageStateEnum.default)
+    private _pageState$: BehaviorSubject<PageStateEnum> = new BehaviorSubject<PageStateEnum>(PageStateEnum.error)
+    private _destroyObs: Subject<void> = new Subject();
 
     constructor(
         private _apiService: ApiService,
@@ -42,10 +55,12 @@ export class MainPage {
 
                     return EMPTY;
                 }),
+                takeUntil(this._destroyObs)
             ).subscribe()
     }
 
     public resetPage(): void {
+        this._destroyObs.next()
         this._pageState$.next(PageStateEnum.default)
     }
 }

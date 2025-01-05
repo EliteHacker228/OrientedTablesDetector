@@ -8,6 +8,16 @@
 
     &__dwnld {
         margin-top: 100px;
-        color: #6565ea;
+        background-color: #6565ea;
+        color: white;
+        border-radius: 16px;
+        padding: 6px 16px;
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            padding: 12px 20px;
+            transition: 0.3s ease-in-out;
+        }
     }
 }
