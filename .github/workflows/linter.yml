@@ -20,5 +20,6 @@ jobs:
         uses: github/super-linter@v5
         env:
           HTMLHINT_CONFIG_FILE: .github/linters/.htmlhintrc
+          TS_CONFIG_FILE: front/tsconfig.json
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
