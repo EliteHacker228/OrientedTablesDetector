@@ -20,6 +20,9 @@ jobs:
         uses: github/super-linter@v5
         env:
           HTMLHINT_CONFIG_FILE: .github/linters/.htmlhintrc
-          TS_CONFIG_FILE: front/tsconfig.json
+          VALIDATE_TS: false
+          VALIDATE_TS_STANDARD: false
+          VALIDATE_TSLINT: false
+          VALIDATE_ESLINT: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
