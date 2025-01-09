@@ -4,7 +4,8 @@ import numpy as np
 import pytest
 from locust import HttpUser, between, task
 from model_ood import detect_objects, get_angle_to_rot_from_result, get_rotated_image
-
+from io import BytesIO
+from PIL import Image
 
 # --- Модульные тесты (Unit Tests) ---
 def test_get_angle_to_rot_from_result():
@@ -97,9 +98,14 @@ class LoadTestUser(HttpUser):
 
     @task
     def predict_task(self):
-        img_data = np.zeros((100, 100, 3), dtype=np.uint8).tolist()
-        self.client.post("/detect", json={"image": img_data})
-
+        image = Image.fromarray(np.zeros((100, 100, 3), dtype=np.uint8), "RGB")
+        image_bytes = BytesIO()
+        image.save(image_bytes, format="PNG")
+        image_bytes.seek(0)
+        self.client.post(
+            "/upload",
+            files={"upload_file": ("test_image.png", image_bytes, "image/png")}
+        )
 
 # --- Параметризованные тесты ---
 @pytest.mark.parametrize(
