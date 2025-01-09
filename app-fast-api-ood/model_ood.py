@@ -44,7 +44,7 @@ def detect_objects(image):
     results = model(image_np)
     annotated_img = results[0].plot()
 
-    angle_to_rot = 0
+    angle_to_rot = 0.0
     for result in results:
         if result.obb is not None and len(result.obb) != 0:
             angle_sum = 0
