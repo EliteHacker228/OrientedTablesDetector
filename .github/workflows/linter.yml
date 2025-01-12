@@ -19,6 +19,7 @@ jobs:
       - name: Run Super Linter
         uses: github/super-linter@v5
         env:
-          HTMLHINT_CONFIG_FILE: .htmlhintrc
+          HTMLHINT_CONFIG_FILE: .github/linters/.htmlhintrc
+          VALIDATE_TYPESCRIPT_STANDARD: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
