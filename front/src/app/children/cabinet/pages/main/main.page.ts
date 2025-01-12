@@ -29,7 +29,7 @@ export class MainPage {
 
     public file!: Blob;
 
-    private _pageState$: BehaviorSubject<PageStateEnum> = new BehaviorSubject<PageStateEnum>(PageStateEnum.error)
+    private _pageState$: BehaviorSubject<PageStateEnum> = new BehaviorSubject<PageStateEnum>(PageStateEnum.default)
     private _destroyObs: Subject<void> = new Subject();
 
     constructor(
